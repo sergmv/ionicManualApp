@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Local Notification</title>
+		
+		<link href="lib/css/ionic.min.css" rel="stylesheet">
+	</head>
+	
+	<body ng-app="NotifyApp" ng-controller="NotifyCtrl">
+	
+		<ion-header-bar class="bar-positive">
+			<h1 class="title">Local Notification</h1>
+			<button class="button button-icon pull-right" ng-click="openModal()">
+				<i class="icon ion-compose"></i> Add
+			</button>
+		</ion-header-bar>
+		
+		<ion-content>
+
+            <ion-list>
+                <ion-item ng-show="!result.length">
+					No notification
+				</ion-item>
+				
+				<ion-item ng-show="result.length" ng-repeat="r in result" item="r">
+                    <h2>{{r.id}}</h2>
+
+                    <ion-option-button class="icon-left ion-trash-a button-assertive"  ng-click="cancelNotification(r.id)">
+                        Cancel
+                    </ion-option-button>
+                </ion-item>
+            </ion-list>
+
+        </ion-content>
+		
+		<script id="new-notify.html" type="text/ng-template">
+
+			<div class="modal">
+				<ion-header-bar class="bar-positive">
+				<h1 class="title">New Notification</h1>
+					<button class="button button-clear button-light" ng-click="closeModal()">Cancel</button>
+				</ion-header-bar>
+
+				<!-- Modal content area -->
+				<ion-content>
+					<form ng-submit="addNotification(task)">
+						
+						<div class="list">
+							<div class="item item-divider">
+								Schedule notifications
+							</div>
+							<label class="item item-input">
+								<input type="text" placeholder="Enter notification id" ng-model="task.id">
+							</label>
+							<label class="item item-input">
+								<input type="text" placeholder="Enter notification message" ng-model="task.msg">
+							</label>
+						</div>
+						
+						<div class="padding">
+							<button type="submit" class="button button-block button-positive">Schedule</button>
+						</div>
+					</form>
+				</ion-content>
+			</div>
+
+		</script>
+		
+		<script src="lib/js/ionic.bundle.min.js"></script>
+		<script src="ng-cordova.min.js"></script>
+		<script src="cordova.js"></script>
+		<script src="app.js"></script> 
+
+	</body>
+</html>
